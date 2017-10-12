@@ -1,0 +1,74 @@
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+  <script src="/socket.io/socket.io.js"></script>
+  	<!-- JQuery -->
+  <script type="text/javascript" src='/js/lib/JQuery/jquery-2.2.4.min.js'></script>
+  	<!-- Boostraps -->
+  <link rel="stylesheet" type="text/css" href="/js/lib/bootstrap/css/bootstrap.min.css">
+  <script type="text/javascript" src='/js/lib/bootstrap/js/bootstrap.min.js'></script>
+  	<!-- Estilo -->
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <!-- Jquery Validator http://formvalidator.net/ -->
+    <script src="/js/lib/Form-Validator/jquery.form-validator.min.js"></script>
+    <script src="/js/lib/Form-Validator/lang/es.js"></script>
+
+    <script>
+    var socket = io('/mobile-game');
+
+    $(document).on("ready", function(){
+      $.validate({
+        form : '#FormularioUsuario',
+          lang: 'es',
+              onSuccess: function(){
+                console.log('sucess');
+                  EnviarPalabra();
+                  // GuardarFormularioUsuario();
+                  // CargarDatosUsuario();
+                  // SiguientePantalla();
+                  return false ;
+              },
+      });
+    });
+
+    EnviarPalabra = function(){
+      console.log("sending word");
+      var palabra1 = $("#palabra1").val();
+      var palabra2 = $("#palabra2").val();
+      var palabra3 = $("#palabra3").val();
+      var msg = {
+        word1: palabra1.toLowerCase(),
+        word2: palabra2.toLowerCase(),
+        word3: palabra3.toLowerCase()
+      };
+      console.log ( msg);
+      socket.emit('sendWord', msg);
+    };
+    </script>
+</head>
+<body>
+  <div id="FormularioUsuario" class="ContenedorPantalla" type="form">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <form id="FormularioUsuario" action="">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <label for="palabra1">¿Cual es el valor de valparaíso?</label>
+                <input type="text" id="palabra1" name="palabra1" class="form-control" data-validation="length" data-validation-length="min1" >
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <label for="palabra2">¿Cuales son sus amenazas?</label>
+                <input type="text" id="palabra2" name="palabra2" class="form-control" data-validation="length" data-validation-length="min1" >
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <label for="palabra3">¿Como podria mejorar?</label>
+                <input type="text" id="palabra3" name="palabra3" class="form-control" data-validation="length" data-validation-length="min1" >
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 margin-top-10px">
+                <input type="submit" value="enviar" class="btn btn-success col-xs-12 col-sm-12 col-md-12 col-lg-12" />
+              </div>
+            </form>
+          </div>
+    </div>
+  </div>
+</body>
+</html>

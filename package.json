@@ -1,0 +1,24 @@
+{
+  "name": "wordCloud",
+  "version": "0.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pespinos/wordCloud"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/pespinos/wordCloud/issues"
+  },
+  "dependencies": {
+    "express": "^4.15.5",
+    "socket.io": "^2.0.3"
+  },
+  "devDependencies": {}
+}
