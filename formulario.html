@@ -16,20 +16,61 @@
     <script>
     var socket = io('/mobile-game');
 
+    var Pantallas = {
+            PantallasID : [],
+            indexActual : 0
+          };
+
     $(document).on("ready", function(){
       $.validate({
         form : '#FormularioUsuario',
+        validateOnBlur : false,
           lang: 'es',
               onSuccess: function(){
                 console.log('sucess');
                   EnviarPalabra();
-                  // GuardarFormularioUsuario();
-                  // CargarDatosUsuario();
-                  // SiguientePantalla();
+                  SiguientePantalla();
+                  window.setTimeout(function(){
+                    SiguientePantalla();
+                    var form = document.getElementById("FormularioUsuario");
+                    form.reset();
+                    },4000);
                   return false ;
               },
       });
+      IniciarPantallas();
     });
+
+    function IniciarPantallas(){
+        var arregloPantallas = [] ;
+        $(".ContenedorPantalla").each(function(){
+            var self = $(this);
+            arregloPantallas.push( self.attr("id") );
+        });
+        Pantallas.PantallasID = arregloPantallas;
+        Pantallas.indexActual = 0 ;
+        //Ocultar todas las pantallas
+        console.log(Pantallas.PantallasID.length);
+        cargarPantalla(0);
+    }
+
+    function cargarPantalla( index ){
+        var pantallaActual = $("#"+Pantallas.PantallasID[index]);
+        $(".ContenedorPantalla").hide();
+        pantallaActual.show('slow');
+    }
+
+    function SiguientePantalla(){
+        // Pantallas.indexActual++;
+        Pantallas.indexActual =  (Pantallas.indexActual+1) % Pantallas.PantallasID.length;
+        console.log("Pantalla actual: " + Pantallas.indexActual);
+        var index = Pantallas.indexActual;
+        var pantallaActual = $("#"+Pantallas.PantallasID[index]);
+
+        $(".ContenedorPantalla").hide();
+        pantallaActual.show('slow');
+    }
+
 
     EnviarPalabra = function(){
       console.log("sending word");
@@ -44,10 +85,11 @@
       console.log ( msg);
       socket.emit('sendWord', msg);
     };
+
     </script>
 </head>
 <body>
-  <div id="FormularioUsuario" class="ContenedorPantalla" type="form">
+  <div id="ContenedorFormulario" class="ContenedorPantalla" type="form">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <form id="FormularioUsuario" action="">
@@ -68,6 +110,11 @@
               </div>
             </form>
           </div>
+    </div>
+  </div>
+  <div id="FormularioEnviado" class="ContenedorPantalla" type="enviado">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h3><center>  ¡Gracias por su participación! </center><h3>
     </div>
   </div>
 </body>

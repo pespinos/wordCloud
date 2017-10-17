@@ -16,8 +16,8 @@ var screenConnected = false;
 
 var currentList = 0;
 
-var maxSize = 500;
-var minSize = 50;
+var maxSize = 250;
+var minSize = 25;
 
 var addWordtoList = function(newWord, list){
   totalWords[list] ++;
@@ -51,8 +51,8 @@ var updateList = function(){
         var relativeLength = word.length/avaregeLength;
         var size = wordList[currentList][i].freq/(totalWords[currentList]*relativeLength);
         size = size*(maxSize-minSize)+minSize;
-        if (size*word.length > 3000)
-        size = 3000/word.length;
+        if (size*word.length > 1080)
+        size = 1080/word.length;
         list.push([word,Math.round(size)]);
       };
     }
