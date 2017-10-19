@@ -11,6 +11,15 @@
     var listaPreguntas = ["¿Cual es el valor de Valparaíso?",
     "¿Cuales son las amenazas de Valparaíso?",
     "¿Como podria mejorar Valparaíso?"];
+    var img = new Image();
+    img.src = "assets/mar.png";
+    img.onload = function(){
+      var canvas = document.getElementById('bgImage');
+
+      var ctx = canvas.getContext("2d");
+      ctx.drawImage(img,0,0,1920,1080);
+    }
+
 
     var onUpdate = function(msg){
       var canvas = document.getElementById('my_canvas');
@@ -31,6 +40,8 @@
       var currentList = msg.index;
       console.log(wordlist.length);
       console.log (wordlist);
+      ctx = canvas.getContext("2d");
+      ctx.clearRect(0,0,canvas.width, canvas.height);
       WordCloud(canvas, {
         list: wordlist,
         drawOutOfBound:false,
@@ -42,11 +53,13 @@
          origin: [canvas.width/2,canvas.height/2],
          rotateRatio: 0.5,
          rotationSteps: 2,
-         backgroundColor: '#020066'
+         clearCanvas: false
+        //  backgroundColor: '#020066'
        });
     };
     socket.on('update',onUpdate);
   </script>
+  <canvas id='bgImage' class = "overlay" width="1920" height="1080"></canvas>
   <canvas id='my_canvas' class="overlay"  width="1920" height="1080"></canvas>
   <canvas id='canvas_overlay' class = "overlay" width="1920" height="1080"></canvas>
 </body>
