@@ -7,12 +7,18 @@
 <body>
   <script>
     var socket = io('/screen-game');
-    var colorList = ['#68b5ff','#97f9fc','#f9f9ff'];
+    var colorList = ['#3564ba','#578fa9','#acdaef'];
+    var areShipReady = false;
     var listaPreguntas = ["¿Cual es el valor de Valparaíso?",
     "¿Cuales son las amenazas de Valparaíso?",
     "¿Como podria mejorar Valparaíso?"];
     var img = new Image();
     img.src = "assets/mar.png";
+    var shipsLayer = new Image();
+    shipsLayer.src = "assets/ships.png"
+    shipsLayer.onload = function(){
+      areShipReady= true;
+    }
     img.onload = function(){
       var canvas = document.getElementById('bgImage');
 
@@ -34,13 +40,16 @@
       ctx.fillStyle = "white";
       ctx.textAlign="center";
       ctx.fillText(pregunta,canvas.width/2,1040);
+      if(areShipReady){
+        ctx.drawImage(shipsLayer,0,0,1920,1080);
+      }
 
 
       var wordlist = msg.wordSea;
       var currentList = msg.index;
       console.log(wordlist.length);
       console.log (wordlist);
-      ctx = canvas.getContext("2d");
+      ctx = canvas.getContext("2d")
       ctx.clearRect(0,0,canvas.width, canvas.height);
       WordCloud(canvas, {
         list: wordlist,
@@ -50,11 +59,11 @@
            return colorList[i];
          },
          gridSize: 16,
-         origin: [canvas.width/2,canvas.height/2],
+         origin: [canvas.width*2/5,canvas.height*3/5],
          rotateRatio: 0.5,
          rotationSteps: 2,
-         clearCanvas: false
-        //  backgroundColor: '#020066'
+         clearCanvas: true,
+         backgroundColor: 'rgba(0,0,0,0)'
        });
     };
     socket.on('update',onUpdate);
