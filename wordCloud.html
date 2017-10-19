@@ -23,7 +23,8 @@
       ctx.shadowColor="black";
       ctx.font = "45px Arial";
       ctx.fillStyle = "white";
-      ctx.fillText(pregunta,10,1040);
+      ctx.textAlign="center";
+      ctx.fillText(pregunta,canvas.width/2,1040);
 
 
       var wordlist = msg.wordSea;
@@ -38,7 +39,7 @@
            return colorList[i];
          },
          gridSize: 16,
-         origin: [canvas.width/3,canvas.height*3/5],
+         origin: [canvas.width/2,canvas.height/2],
          rotateRatio: 0.5,
          rotationSteps: 2,
          backgroundColor: '#020066'
