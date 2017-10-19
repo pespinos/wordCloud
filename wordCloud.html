@@ -18,6 +18,10 @@
     shipsLayer.src = "assets/ships.png"
     shipsLayer.onload = function(){
       areShipReady= true;
+        var canvas = document.getElementById('canvas_overlay');
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(shipsLayer,0,0,1920,1080);
+
     }
     img.onload = function(){
       var canvas = document.getElementById('bgImage');
@@ -58,7 +62,7 @@
            var i = Math.floor(Math.random()*colorList.length);
            return colorList[i];
          },
-         gridSize: 16,
+         gridSize: 20,
          origin: [canvas.width*2/5,canvas.height*3/5],
          rotateRatio: 0.5,
          rotationSteps: 2,
