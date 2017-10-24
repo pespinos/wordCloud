@@ -17,7 +17,7 @@ var screenConnected = false;
 var currentList = 0;
 
 var maxSize = 250;
-var minSize = 25;
+var minSize = 30;
 
 var addWordtoList = function(newWord, list){
   totalWords[list] ++;

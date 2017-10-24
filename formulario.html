@@ -1,6 +1,8 @@
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+  <meta name="viewport" content="width=device-width, user-scalable=no , initial-scale=1, shrink-to-fit=yes">
+  <meta name="apple-mobile-web-app-capable"
+      content="yes" />
   <script src="/socket.io/socket.io.js"></script>
   	<!-- JQuery -->
   <script type="text/javascript" src='/js/lib/JQuery/jquery-2.2.4.min.js'></script>
@@ -89,7 +91,11 @@
     </script>
 </head>
 <body>
-  <div id="ContenedorFormulario" class="ContenedorPantalla" type="form">
+  <div id="ContenedorFormulario" class="ContenedorPantalla container-fluid" type="form">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <img src="assets/logos2-01.png" style= "max-height: 150px" />
+      <img src="assets/logos2-03.png" style= "max-height: 100px" />
+    </div>
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <form id="FormularioUsuario" action="">
@@ -106,16 +112,16 @@
                 <input type="text" id="palabra3" name="palabra3" class="form-control" data-validation="length" data-validation-length="min1" >
               </div>
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 margin-top-10px">
-                <input type="submit" value="enviar" class="btn btn-success col-xs-12 col-sm-12 col-md-12 col-lg-12" />
+                <input type="submit" value="enviar" class="button btn col-xs-12 col-sm-12 col-md-12 col-lg-12" />
               </div>
             </form>
           </div>
     </div>
+    <img src="assets/logos2-02.png" class="arq-logo"/>
   </div>
-  <div id="FormularioEnviado" class="ContenedorPantalla" type="enviado">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <h3><center>  ¡Gracias por su participación! </center><h3>
-    </div>
+  <div id="FormularioEnviado" class="ContenedorPantalla text-align-center" type="enviado">
+    <h3>¡Gracias por su participación!</h3>
+</div>
   </div>
 </body>
 </html>
